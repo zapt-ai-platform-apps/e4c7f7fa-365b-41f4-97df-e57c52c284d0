@@ -1,16 +1,26 @@
-import { createSignal, onMount, Show } from 'solid-js';
+import { createSignal, onMount, Show, For } from 'solid-js';
 import axios from 'axios';
+import qs from 'qs';
 
 function Events() {
   const [events, setEvents] = createSignal([]);
   const [loading, setLoading] = createSignal(false);
+  const API_KEY = import.meta.env.VITE_EVENTBRITE_API_KEY;
 
   const fetchEvents = async () => {
     setLoading(true);
     try {
-      // Replace with actual API or data source
-      const response = await axios.get('https://api.example.com/morzine/events');
-      setEvents(response.data);
+      const query = qs.stringify({
+        'location.address': 'Morzine, France',
+        'start_date.range_start': new Date().toISOString(),
+        'sort_by': 'date',
+      });
+      const response = await axios.get(`https://www.eventbriteapi.com/v3/events/search/?${query}`, {
+        headers: {
+          Authorization: `Bearer ${API_KEY}`,
+        },
+      });
+      setEvents(response.data.events);
     } catch (error) {
       console.error('Error fetching events:', error);
     } finally {
@@ -30,17 +40,19 @@ function Events() {
       </Show>
       <Show when={!loading() && events().length > 0}>
         <div class="space-y-4">
-          {events().map((event) => (
-            <div class="bg-white p-4 rounded-lg shadow-md">
-              <h3 class="font-semibold text-lg">{event.title}</h3>
-              <p>{event.date}</p>
-              <p>{event.description}</p>
-            </div>
-          ))}
+          <For each={events()}>
+            {(event) => (
+              <div class="bg-white p-4 rounded-lg shadow-md cursor-pointer">
+                <h3 class="font-semibold text-lg">{event.name.text}</h3>
+                <p>{new Date(event.start.local).toLocaleString()}</p>
+                <p>{event.description.text}</p>
+              </div>
+            )}
+          </For>
         </div>
       </Show>
       <Show when={!loading() && events().length === 0}>
-        <p class="text-red-500">Events data is currently unavailable.</p>
+        <p class="text-red-500">No upcoming events found.</p>
       </Show>
     </div>
   );

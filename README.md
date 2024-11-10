@@ -77,14 +77,25 @@ The **Morzine Travel Guide** app is designed to enhance the experience of visito
 
   - Used to fetch current weather data and forecasts for Morzine.
   - API Key required: `VITE_WEATHER_API_KEY`
+  - [API Documentation](https://openweathermap.org/api)
 
-- **Additional APIs**
+- **Yelp Fusion API**
 
-  - **Ski Conditions API**: Fetches the latest ski conditions for Morzine.
-  - **Restaurants API**: Provides data on top restaurants in the area.
-  - **Events API**: Retrieves information on upcoming events.
+  - Used to fetch top restaurants in Morzine.
+  - API Key required: `VITE_YELP_API_KEY`
+  - [API Documentation](https://www.yelp.com/developers/documentation/v3)
 
-  *Note: The above APIs for ski conditions, restaurants, and events are placeholders. Implement actual APIs or data sources as needed.*
+- **Eventbrite API**
+
+  - Used to retrieve upcoming events in Morzine.
+  - API Key required: `VITE_EVENTBRITE_API_KEY`
+  - [API Documentation](https://www.eventbrite.com/platform/api)
+
+- **Ski Resort Info API**
+
+  - Used to fetch current ski conditions for Morzine.
+  - API Key required: `VITE_SKI_API_KEY`
+  - [API Documentation](https://rapidapi.com/API_Sports/api/ski-resort-data)
 
 ## Environment Variables
 
@@ -92,38 +103,9 @@ The **Morzine Travel Guide** app is designed to enhance the experience of visito
 - `VITE_PUBLIC_APP_ENV`: Environment (e.g., production, development).
 - `VITE_PUBLIC_APP_ID`: Your app's unique ID for PWA support.
 - `VITE_WEATHER_API_KEY`: API key for OpenWeatherMap.
-
-## Installation and Setup
-
-1. **Clone the Repository**
-
-   ```bash
-   git clone https://github.com/yourusername/morzine-app.git
-   cd morzine-app
-   ```
-
-2. **Install Dependencies**
-
-   ```bash
-   npm install
-   ```
-
-3. **Configure Environment Variables**
-
-   - Create a `.env` file in the root directory.
-   - Add the required environment variables as shown in the `.env` file above.
-
-4. **Run the App**
-
-   ```bash
-   npm run dev
-   ```
-
-5. **Build for Production**
-
-   ```bash
-   npm run build
-   ```
+- `VITE_YELP_API_KEY`: API key for Yelp Fusion API.
+- `VITE_EVENTBRITE_API_KEY`: API key for Eventbrite API.
+- `VITE_SKI_API_KEY`: API key for Ski Resort Info API.
 
 ## Notes
 

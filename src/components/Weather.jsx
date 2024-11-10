@@ -1,4 +1,4 @@
-import { createSignal, onMount, Show } from 'solid-js';
+import { createSignal, onMount, Show, For } from 'solid-js';
 import axios from 'axios';
 
 function Weather() {
@@ -32,14 +32,16 @@ function Weather() {
       </Show>
       <Show when={!loading() && weatherData()}>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {weatherData().list.slice(0, 9).map((forecast) => (
-            <div class="bg-white p-4 rounded-lg shadow-md">
-              <p class="font-semibold">{new Date(forecast.dt_txt).toLocaleString()}</p>
-              <p>{forecast.weather[0].description}</p>
-              <p>Temp: {forecast.main.temp}°C</p>
-              <p>Wind: {forecast.wind.speed} m/s</p>
-            </div>
-          ))}
+          <For each={weatherData().list.slice(0, 9)}>
+            {(forecast) => (
+              <div class="bg-white p-4 rounded-lg shadow-md">
+                <p class="font-semibold">{new Date(forecast.dt_txt).toLocaleString()}</p>
+                <p>{forecast.weather[0].description}</p>
+                <p>Temp: {forecast.main.temp}°C</p>
+                <p>Wind: {forecast.wind.speed} m/s</p>
+              </div>
+            )}
+          </For>
         </div>
       </Show>
     </div>
