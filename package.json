@@ -12,7 +12,8 @@
     "solid-js": "^1.8.22",
     "solid-markdown": "^2.0.13",
     "axios": "^1.4.0",
-    "@solidjs/router": "^0.8.4"
+    "@solidjs/router": "^0.8.4",
+    "@sentry/browser": "^8.35.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
